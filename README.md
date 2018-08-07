@@ -1,8 +1,9 @@
-# LivePhoto
+![LivePhotoIcon](https://support.apple.com/library/content/dam/edam/applecare/images/en_US/ios/iphoto/ios11-camera-live-photo-icon.png)
+# LivePhoto.swift
 ## A single-file helper library to work with Apple Live Photos
 
 A Live Photo is a paired camera photo ("key photo") and video recording ("paired video").
-Learn more about Live Photos from our [in depth blog post](#).
+Learn more about Live Photos from our [in-depth blog post](https://www.limit-point.com/blog/2018/live-photos).
 
 ### Live Photo format
 A Live Photo consists of two resources paired using an asset identifier (a UUID string):
@@ -20,4 +21,13 @@ LivePhoto.extractResources(from: livePhoto, completion: resources -> Void) {
   let pairedImageURL = resources.pairedImageURL
   let pairedVideoURL = resources.pairedVideoURL
 }
+```
+#### Generating a Live Photo & Saving it to the Photo Library
+```swift
+LivePhoto.generate(from: photoURL, videoURL: videoURL, progress: { percent in }, completion: { livePhoto, resources in
+  // Display the Live Photo in a PHLivePhotoView
+  livePhotoView.livePhoto = livePhoto
+  // Or save the resources to the Photo library
+  LivePhoto.saveToLibrary(resources)
+  })
 ```
