@@ -289,7 +289,7 @@ class LivePhoto {
                     }
                 }
             } else {
-                writingAudioFinished = false
+                writingAudioFinished = true
                 didCompleteWriting()
             }
         } catch {
