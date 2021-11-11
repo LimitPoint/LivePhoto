@@ -174,12 +174,13 @@ class LivePhoto {
     
     func addAssetID(_ assetIdentifier: String, toImage imageURL: URL, saveTo destinationURL: URL) -> URL? {
         guard let imageDestination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypeJPEG, 1, nil),
-            let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil),
-            var imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [AnyHashable : Any] else { return nil }
+              let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil),
+              let imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, nil), 
+                var imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [AnyHashable : Any] else { return nil }
         let assetIdentifierKey = "17"
         let assetIdentifierInfo = [assetIdentifierKey : assetIdentifier]
         imageProperties[kCGImagePropertyMakerAppleDictionary] = assetIdentifierInfo
-        CGImageDestinationAddImageFromSource(imageDestination, imageSource, 0, imageProperties as CFDictionary)
+        CGImageDestinationAddImage(imageDestination, imageRef, imageProperties as CFDictionary)
         CGImageDestinationFinalize(imageDestination)
         return destinationURL
     }
