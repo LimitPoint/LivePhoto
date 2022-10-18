@@ -2,6 +2,9 @@
 //  LivePhoto.swift
 //  Live Photos
 //
+//  Read discussion at:
+//  http://www.limit-point.com/blog/2018/live-photos/
+//
 //  Created by Alexander Pagliaro on 7/25/18.
 //  Copyright © 2018 Limit Point LLC. All rights reserved.
 //

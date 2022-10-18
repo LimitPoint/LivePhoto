@@ -1,5 +1,9 @@
 //
 //  AVAsset-extensions.swift
+//  Live Photos
+//
+//  Read discussion at:
+//  http://www.limit-point.com/blog/2018/live-photos/
 //
 //  Created by Joe Pagliaro on 10/5/17.
 //  Copyright © 2017 Limit Point LLC. All rights reserved.
