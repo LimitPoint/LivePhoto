@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Assemble-->
         <scene sceneID="BMI-9R-OLe">
             <objects>
-                <viewController storyboardIdentifier="Assemble" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IhE-hb-fbd" customClass="AssembleLivePhotoViewController" customModule="Live_Photos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Assemble" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IhE-hb-fbd" customClass="AssembleLivePhotoViewController" customModule="Live_Photos_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Btj-mr-kgf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,19 +25,19 @@
                                 </constraints>
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7P0-zf-WIJ">
-                                <rect key="frame" x="19" y="424.5" width="282" height="2"/>
+                                <rect key="frame" x="19" y="424.5" width="282" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="282" id="6cW-ij-6Hy"/>
                                 </constraints>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Of6-9N-RBw">
-                                <rect key="frame" x="139" y="396" width="42" height="20.5"/>
+                                <rect key="frame" x="139.5" y="396" width="41.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yut-qN-Y96">
-                                <rect key="frame" x="68.5" y="434.5" width="183" height="84.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yut-qN-Y96">
+                                <rect key="frame" x="68.5" y="436.5" width="183" height="82.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Create Live Photo"/>
                                 <connections>
@@ -65,7 +63,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fsh-ZX-jac">
                                 <rect key="frame" x="19" y="353" width="282" height="33"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIH-ep-Pcs">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIH-ep-Pcs">
                                         <rect key="frame" x="0.0" y="0.0" width="141" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Pick Photo"/>
@@ -73,7 +71,7 @@
                                             <action selector="pickPhoto:" destination="IhE-hb-fbd" eventType="touchUpInside" id="Nfy-s2-Jig"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKp-3q-A9X">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKp-3q-A9X">
                                         <rect key="frame" x="141" y="0.0" width="141" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Pick Video"/>
@@ -84,9 +82,10 @@
                                 </subviews>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qq9-Le-GLh">
-                                <rect key="frame" x="113" y="396.5" width="20" height="20"/>
+                                <rect key="frame" x="113.5" y="396.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="AqO-zy-d1z"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Of6-9N-RBw" firstAttribute="leading" secondItem="qq9-Le-GLh" secondAttribute="trailing" constant="6" id="24f-15-sLA"/>
@@ -109,7 +108,6 @@
                             <constraint firstItem="Of6-9N-RBw" firstAttribute="top" secondItem="fsh-ZX-jac" secondAttribute="bottom" constant="10" id="r8m-pQ-5Ac"/>
                             <constraint firstItem="AqO-zy-d1z" firstAttribute="trailing" secondItem="fsh-ZX-jac" secondAttribute="trailing" constant="19" id="tfR-LY-8Cn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="AqO-zy-d1z"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Assemble" image="assemble-25" id="73P-4e-Gcg"/>
                     <connections>
@@ -131,7 +129,7 @@
         <!--Disassemble-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController storyboardIdentifier="Disassemble" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9pv-A4-QxB" userLabel="Disassemble" customClass="DisassembleLivePhotoViewController" customModule="Live_Photos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Disassemble" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9pv-A4-QxB" userLabel="Disassemble" customClass="DisassembleLivePhotoViewController" customModule="Live_Photos_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,19 +142,19 @@
                                 </constraints>
                             </view>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4jK-dU-P4u">
-                                <rect key="frame" x="19" y="424.5" width="282" height="2"/>
+                                <rect key="frame" x="19" y="424.5" width="282" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="282" id="N1p-gJ-jCu"/>
                                 </constraints>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFt-or-NsZ">
-                                <rect key="frame" x="139" y="396" width="42" height="20.5"/>
+                                <rect key="frame" x="139.5" y="396" width="41.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9w-ha-dHM">
-                                <rect key="frame" x="81" y="434.5" width="158" height="84.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9w-ha-dHM">
+                                <rect key="frame" x="81" y="436.5" width="158" height="82.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Pick Live Photo"/>
                                 <connections>
@@ -182,7 +180,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Uly-gb-cTv">
                                 <rect key="frame" x="19" y="353" width="282" height="33"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1G-eJ-Vck">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1G-eJ-Vck">
                                         <rect key="frame" x="0.0" y="0.0" width="141" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Save Photo"/>
@@ -190,7 +188,7 @@
                                             <action selector="savePhoto" destination="9pv-A4-QxB" eventType="touchUpInside" id="VkW-Bp-kTa"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SaW-RC-cfR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SaW-RC-cfR">
                                         <rect key="frame" x="141" y="0.0" width="141" height="33"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <state key="normal" title="Save Video"/>
@@ -201,9 +199,10 @@
                                 </subviews>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-rU-epV">
-                                <rect key="frame" x="113" y="396.5" width="20" height="20"/>
+                                <rect key="frame" x="113.5" y="396.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0vM-Ek-9lc" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="19" id="1wv-x8-dUN"/>
@@ -226,7 +225,6 @@
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="Uly-gb-cTv" secondAttribute="trailing" constant="19" id="zGn-u2-xdx"/>
                             <constraint firstItem="K9w-ha-dHM" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="zMW-Aa-qNx"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Disassemble" image="disassemble-25" id="acW-dT-cKf"/>
                     <connections>
@@ -252,7 +250,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" restorationIdentifier="TabBar" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
@@ -267,5 +265,8 @@
     <resources>
         <image name="assemble-25" width="25" height="25"/>
         <image name="disassemble-25" width="25" height="25"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
