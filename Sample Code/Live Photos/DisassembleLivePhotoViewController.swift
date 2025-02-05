@@ -30,13 +30,12 @@ class DisassembleLivePhotoViewController: BaseLivePhotoViewController {
     @IBOutlet var savePairedVideoButton: UIButton!
 
     @IBAction func pickLivePhoto(_ sender: AnyObject) {
-        let picker = UIImagePickerController()
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        picker.allowsEditing = false
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = 1
+        config.filter = .any(of: [.livePhotos]) // Allows selecting Live Photos
+        
+        let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
-        
-        picker.mediaTypes = [kUTTypeLivePhoto, kUTTypeImage] as [String]
-        
         present(picker, animated: true, completion: nil)
     }
     
@@ -167,21 +166,26 @@ class DisassembleLivePhotoViewController: BaseLivePhotoViewController {
         })
     }
     
-    // MARK: UIImagePickerControllerDelegate
-    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
-        if mediaType == kUTTypeLivePhoto {
-            guard let livePhoto = info[UIImagePickerControllerLivePhoto] as? PHLivePhoto else {
-                self.postAlert("Photo Picker", message: "Could not retrieve the picked photo.")
-                return;
-            }
-            self.livePhotoView.livePhoto = livePhoto
-            disassembleLivePhoto()
-        } else {
-            self.postAlert("It seems a live photo was not selected.", message:"Try again.")
-        }
+    // MARK: PHPickerViewControllerDelegate
+    override func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
+        
+        guard let itemProvider = results.first?.itemProvider,
+              itemProvider.canLoadObject(ofClass: PHLivePhoto.self) else {
+            self.postAlert("It seems a live photo was not selected.", message: "Try again.")
+            return
+        }
+        
+        itemProvider.loadObject(ofClass: PHLivePhoto.self) { (livePhoto, error) in
+            DispatchQueue.main.async {
+                if let livePhoto = livePhoto as? PHLivePhoto {
+                    self.livePhotoView.livePhoto = livePhoto
+                    self.disassembleLivePhoto()
+                } else {
+                    self.postAlert("Photo Picker", message: "Could not retrieve the picked photo.")
+                }
+            }
+        }
     }
-    
 }
 

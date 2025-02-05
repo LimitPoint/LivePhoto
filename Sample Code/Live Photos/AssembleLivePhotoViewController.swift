@@ -19,7 +19,7 @@ import AVKit
 
 class AssembleLivePhotoViewController: BaseLivePhotoViewController{
     
-    private let pickedVideoName = "pickedExportedVideo.mov" // for exporting AVURLAsset to Documents
+    private let pickedVideoName = "pickedExportedVideo.mov"
     
     @IBOutlet var pickKeyPhotoButton: UIButton!
     @IBOutlet var pickPairedVideoButton: UIButton!
@@ -27,22 +27,23 @@ class AssembleLivePhotoViewController: BaseLivePhotoViewController{
     
     var pickedPhoto: UIImage?
     var pickedVideoURL: URL?
-
+    
     @IBAction func pickPhoto(_ sender: AnyObject) {
-        let picker = UIImagePickerController()
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        picker.allowsEditing = false
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = 1
+        config.filter = .any(of: [.livePhotos, .images]) // Allows selecting Live Photos and Images
+        
+        let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
-        picker.mediaTypes = [kUTTypeLivePhoto as String, kUTTypeImage as String]
         present(picker, animated: true, completion: nil)
     }
     
     @IBAction func pickVideo(_ sender: AnyObject) {
-        let picker = UIImagePickerController()
-        picker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum
-        picker.videoQuality = .typeHigh
-        picker.mediaTypes = [kUTTypeMovie as String, kUTTypeVideo as String, kUTTypeQuickTimeMovie as String]
-        picker.allowsEditing = false
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = 1
+        config.filter = .videos // Allows selecting only videos
+        
+        let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
@@ -79,93 +80,74 @@ class AssembleLivePhotoViewController: BaseLivePhotoViewController{
         }
     }
 
-    // MARK: UIImagePickerControllerDelegate
+    // MARK: PHPickerViewControllerDelegate
+    func retrieveVideoByPHAsset(_ phAsset: PHAsset) {
+        let options = PHVideoRequestOptions()
+        options.isNetworkAccessAllowed = true
+        options.deliveryMode = .highQualityFormat
+        
+        let imageManager = PHImageManager.default()
+        
+        imageManager.requestAVAsset(forVideo: phAsset, options: options) { avAsset, _, _ in
+            if let urlAsset = avAsset as? AVURLAsset {
+                let _ = urlAsset.exportToDocuments(filename: self.pickedVideoName) { outputURL in
+                    DispatchQueue.main.async {
+                        self.didPickVideo(outputURL)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.postAlert("Video Picker", message: "Could not retrieve the video.")
+                }
+            }
+        }
+    }
     
-    func didPickVideo(_ videoURL:URL) -> Void {
+        // MARK: - Handle Picked Video
+    func didPickVideo(_ videoURL: URL) {
         self.pickedVideoURL = videoURL
         self.playVideo(videoURL)
     }
     
-    func retrieveVideoByPHAsset(_ info: [String : Any]) -> Bool {
+    override func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
         
-        var byPHAsset = false
+        guard let itemProvider = results.first?.itemProvider else { return }
         
-        if #available(iOS 11.0, *) {
-            
-            let something = info[UIImagePickerControllerPHAsset]
-            
-            if let phasset = something as? PHAsset  {
-                
-                let options = PHVideoRequestOptions()
-                
-                options.isNetworkAccessAllowed = true
-                options.deliveryMode = .highQualityFormat
-                
-                let imageManager = PHImageManager.default()
-                
-                byPHAsset = true
-                
-                imageManager.requestAVAsset(forVideo: phasset, options: options, resultHandler: { (avAsset, avAudioMix, info) in
-                    if let urlAsset = avAsset as? AVURLAsset {
-                        let _ = urlAsset.self.exportToDocuments(filename: self.pickedVideoName, completion: { (outputURL) in
-                            
-                            self.didPickVideo(outputURL)
-                        })
-                    }
-                })
-            }
-        }
-        
-        return byPHAsset
-    }
-    
-    func retrieveVideoByReferenceURL(_ info: [String : Any]) -> Bool {
-        
-        var byReferenceURL = false
-        
-        if let videoURL = info[UIImagePickerControllerReferenceURL] as? URL  {
-            
-            let asset = AVURLAsset(url:videoURL)
-            
-            byReferenceURL = asset.self.exportToDocuments(filename: self.pickedVideoName, completion: { (outputURL) in
-                
-                self.didPickVideo(outputURL)
-            })
-        }
-        
-        return byReferenceURL
-    }
-    
-    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
-        
-        dismiss(animated: true) {
-            
-            if mediaType == kUTTypeMovie || mediaType == kUTTypeVideo || mediaType == kUTTypeQuickTimeMovie {
-                
-                if self.retrieveVideoByPHAsset(info) == false {
-                    
-                    if self.retrieveVideoByReferenceURL(info) == false {
-                        
-                        if  let videoURL = info[UIImagePickerControllerMediaURL] as? URL  {
-                            
-                            self.didPickVideo(videoURL)
-                        }
-                    }
+        if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
+                // Attempt to retrieve the video via PHAsset first
+            if let assetIdentifier = results.first?.assetIdentifier {
+                let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
+                if let phAsset = fetchResult.firstObject {
+                    retrieveVideoByPHAsset(phAsset)
+                    return
                 }
-
             }
-            else if mediaType == kUTTypeImage || mediaType == kUTTypeLivePhoto {
-                
-                guard let image = (info[UIImagePickerControllerOriginalImage] as? UIImage) else {
-                    self.postAlert("Photo Picker", message: "Could not retrieve the picked photo.")
+            
+                // If PHAsset retrieval fails, attempt reference URL method
+            itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
+                guard let url = url, error == nil else {
+                    DispatchQueue.main.async {
+                        self.postAlert("Video Picker", message: "Could not retrieve the picked video.")
+                    }
                     return
                 }
                 
-                self.pickedPhoto = image
+                DispatchQueue.main.async {
+                    self.didPickVideo(url)
+                }
+            }
+        } else if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                guard let image = image as? UIImage, error == nil else {
+                    DispatchQueue.main.async {
+                        self.postAlert("Photo Picker", message: "Could not retrieve the picked photo.")
+                    }
+                    return
+                }
                 
                 DispatchQueue.main.async {
+                    self.pickedPhoto = image
                     self.keyPhotoView.image = image
                 }
             }
