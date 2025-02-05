@@ -17,7 +17,7 @@ import MobileCoreServices
 import AVFoundation
 import AVKit
 
-class BaseLivePhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHLivePhotoViewDelegate {
+class BaseLivePhotoViewController: UIViewController, PHPickerViewControllerDelegate, UINavigationControllerDelegate, PHLivePhotoViewDelegate {
 
     var playerController: AVPlayerViewController?
     var player: AVPlayer?
@@ -32,6 +32,9 @@ class BaseLivePhotoViewController: UIViewController, UIImagePickerControllerDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        print(self.view.frame)
+        print(self.pairedVideoView.frame)
+        print(self.keyPhotoView.frame)
         self.playerController?.view.frame = self.view.convert(self.pairedVideoView.frame, from: self.pairedVideoView.superview)
     }
     
@@ -41,18 +44,14 @@ class BaseLivePhotoViewController: UIViewController, UIImagePickerControllerDele
         livePhotoView.contentMode = .scaleAspectFit
         livePhotoView.delegate = self
         
-        let livePhotoBadge = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-        
-        guard let livePhotoBadgeImage = livePhotoBadge.cgImage else {
-            return
-        }
+        let livePhotoBadge = PHLivePhotoView.livePhotoBadgeImage(options: .overContent).cgImage
         
         self.livePhotoBadgeLayer.frame = livePhotoView.bounds
         self.livePhotoBadgeLayer.contentsGravity = kCAGravityTopLeft
         self.livePhotoBadgeLayer.isGeometryFlipped = true
         self.livePhotoBadgeLayer.contentsScale = UIScreen.main.scale
         
-        self.livePhotoBadgeLayer.contents = livePhotoBadgeImage
+        self.livePhotoBadgeLayer.contents = livePhotoBadge
         livePhotoView.layer.addSublayer(self.livePhotoBadgeLayer)
         
         playerController = AVPlayerViewController()
@@ -121,12 +120,8 @@ class BaseLivePhotoViewController: UIViewController, UIImagePickerControllerDele
     }
     
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
     }
     
     // MARK: PHLivePhotoViewDelegate
