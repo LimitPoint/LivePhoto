@@ -14,6 +14,7 @@
 		CD0992C7204A1F930096F484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD0992C6204A1F930096F484 /* Assets.xcassets */; };
 		CD0992CA204A1F930096F484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD0992C8204A1F930096F484 /* LaunchScreen.storyboard */; };
 		CD0992EE2053199C0096F484 /* AVAsset-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0992ED2053199C0096F484 /* AVAsset-extensions.swift */; };
+		CDC961FD2D530B2A00C59D2B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CDC961FC2D530B2A00C59D2B /* Credits.rtf */; };
 		CDE2BCEF205470830025A3A8 /* UIViewController-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2BCEE205470820025A3A8 /* UIViewController-extensions.swift */; };
 		CDE2BCF62054B49B0025A3A8 /* pairedVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = CDE2BCF42054B49B0025A3A8 /* pairedVideo.mov */; };
 		CDE2BCF72054B49B0025A3A8 /* keyPhoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDE2BCF52054B49B0025A3A8 /* keyPhoto.jpg */; };
@@ -33,6 +34,7 @@
 		CD0992C9204A1F930096F484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD0992CB204A1F930096F484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD0992ED2053199C0096F484 /* AVAsset-extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAsset-extensions.swift"; sourceTree = "<group>"; };
+		CDC961FC2D530B2A00C59D2B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		CDE2BCEE205470820025A3A8 /* UIViewController-extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController-extensions.swift"; sourceTree = "<group>"; };
 		CDE2BCF42054B49B0025A3A8 /* pairedVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = pairedVideo.mov; sourceTree = "<group>"; };
 		CDE2BCF52054B49B0025A3A8 /* keyPhoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = keyPhoto.jpg; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				CDF08E8A2062D85B008395EF /* Controllers */,
 				CD0992BD204A1F930096F484 /* AppDelegate.swift */,
 				CD0992C3204A1F930096F484 /* Main.storyboard */,
+				CDC961FC2D530B2A00C59D2B /* Credits.rtf */,
 				CD0992C6204A1F930096F484 /* Assets.xcassets */,
 				CD0992C8204A1F930096F484 /* LaunchScreen.storyboard */,
 				CD0992CB204A1F930096F484 /* Info.plist */,
@@ -169,6 +172,7 @@
 				CD0992CA204A1F930096F484 /* LaunchScreen.storyboard in Resources */,
 				CDE2BD05205764830025A3A8 /* Basso.m4a in Resources */,
 				CD0992C7204A1F930096F484 /* Assets.xcassets in Resources */,
+				CDC961FD2D530B2A00C59D2B /* Credits.rtf in Resources */,
 				FA006FB42119847D00722E69 /* README.md in Resources */,
 				CD0992C5204A1F930096F484 /* Main.storyboard in Resources */,
 				CDE2BCF72054B49B0025A3A8 /* keyPhoto.jpg in Resources */,
