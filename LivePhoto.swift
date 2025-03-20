@@ -231,6 +231,9 @@ class LivePhoto {
                     print(error)
                 }
             }
+            else {
+                audioReader = nil
+            }
             // Create necessary identifier metadata and still image time metadata
             let assetIdentifierMetadata = metadataForAssetID(assetIdentifier)
             let stillImageTimeMetadataAdapter = createMetadataAdaptorForStillImageTime()
